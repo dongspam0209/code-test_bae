@@ -35,9 +35,9 @@ def solution(fees, records):
         
         fin_dict_park[car_num]+=parked_time
     
-    fin_dict_park=dict(sorted(fin_dict_park.items()))
-    arr=fin_dict_park.values()
-    for time in arr:
+    fin_dict_park=sorted(fin_dict_park.items())
+    
+    for car_num,time in fin_dict_park:
         if time>fees[0]:
             fee=fees[1]+math.ceil((time-fees[0])/fees[2])*fees[3]
         else:
