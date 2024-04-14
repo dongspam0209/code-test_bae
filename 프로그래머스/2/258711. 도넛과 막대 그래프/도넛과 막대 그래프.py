@@ -10,13 +10,15 @@ def solution(edges):
         node_dict[src][0]+=1
         node_dict[dst][1]+=1
     for node,cnt in node_dict.items():
-        if cnt[1]==0 and cnt[0]>=2:
-            answer[0]=node
-        elif cnt[0]==0 and cnt[1]>0:
-            answer[2]+=1
-        elif cnt[0]>=2 and cnt[1]>=2:
-            answer[3]+=1
+        out_count=cnt[0]
+        in_count=cnt[1]
+        if in_count==0 and out_count>=2:
+            answer[0]=node # gen_node
+        elif out_count==0 and in_count>0:
+            answer[2]+=1  # stick graph
+        elif out_count>=2 and in_count>=2:
+            answer[3]+=1  # 8 graph
         
-    answer[1]= node_dict[answer[0]][0]-answer[2]-answer[3]
+    answer[1]= node_dict[answer[0]][0]-answer[2]-answer[3] # else doughnut graph
     
     return answer
