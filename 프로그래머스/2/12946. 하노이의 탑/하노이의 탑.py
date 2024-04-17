@@ -1,12 +1,5 @@
 def solution(n):
-    answer = []
-    hanoi(n,1,3,2,answer)
+    answer = [[]]
+    plates=[size for size in range(n)]
+    print(plates)
     return answer
-
-def hanoi(n,start,end,sub,answer):
-    if n==1:
-        answer.append([start,end])
-    else:
-        hanoi(n-1,start,sub,end,answer)
-        answer.append([start,end])
-        hanoi(n-1,sub,end,start,answer)
