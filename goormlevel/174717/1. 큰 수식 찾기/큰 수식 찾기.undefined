@@ -1,0 +1,55 @@
+A,B=input().split()
+
+def calculate(expression):
+	stack=[]
+	for char in expression:
+		if char.isdigit():
+			stack.append(char)
+		elif char=="*":
+			temp_A=stack.pop()
+			temp_B=stack.pop()
+			stack.append(int(temp_A)*int(temp_B))
+		elif char=="+":
+			temp_A=stack.pop()
+			temp_B=stack.pop()
+			stack.append(int(temp_A)+int(temp_B))
+		elif char=="-":
+			temp_A=stack.pop()
+			temp_B=stack.pop()
+			stack.append(int(temp_B)-int(temp_A))
+			
+	return stack[0]
+	
+	
+	
+def make_exp(text):
+	expression=[]
+	number=""
+	for char in text:
+		if char.isdigit():
+			number+=char
+		else:
+			expression.append(number)
+			expression.append(char)
+			number=""
+	expression.append(number)
+	
+	return expression
+
+def post_fix(expression):
+	priority = {'*':2,'+':1,'-':1}
+	result=[]
+	stack=[]
+	for char in expression:
+		if char.isdigit():
+			result.append(char)
+		else:
+			while stack and priority[char]<=priority[stack[-1]]:
+				result.append(stack.pop())
+			stack.append(char)
+			
+	while len(stack)!=0:
+		result.append(stack.pop())
+	return result
+
+print(max(calculate(post_fix(make_exp(A))),calculate(post_fix(make_exp(B)))))
