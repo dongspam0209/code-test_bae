@@ -1,0 +1,12 @@
+N,K=map(int,input().split())
+decimal_list=map(int,input().split())
+
+number_list=[]
+for dec in decimal_list:
+	binary=format(dec,'b') #10→2
+	one_cnts=binary.count('1') #1의 갯수
+	number_list.append((one_cnts,dec))
+
+number_list.sort(key=lambda x : (-x[0],-x[1]))
+
+print(number_list[K-1][1])
